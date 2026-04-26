@@ -36,14 +36,10 @@ export default function MethodPage() {
           </div>
 
           {/* Hero */}
-          <h1 className="text-[48px] leading-[1.0] font-semibold tracking-[-0.02em] text-[var(--fg)] mb-3">
+          <h1 className="text-[48px] leading-[1.0] font-semibold tracking-[-0.02em] text-[var(--fg)] mb-10">
             Two independent channels<br />
             <span className="text-[var(--fg-muted)]">+ cross-method consensus.</span>
           </h1>
-          <p className="text-[15px] text-[var(--fg-muted)] max-w-[760px] leading-relaxed mb-10">
-            No labels. No prior trait knowledge. Just a (base, fine-tuned) pair on the same
-            tokenizer.
-          </p>
 
           {/* Pipeline diagram */}
           <div className="surface p-8 mb-7">
