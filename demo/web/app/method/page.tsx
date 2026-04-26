@@ -91,14 +91,7 @@ export default function MethodPage() {
                 icon={<Activity size={18} />}
                 title="Behavioral fingerprint"
                 tag="needs inference"
-                stages={[
-                  "various prompts",
-                  "KL(ft ‖ base)",
-                  <TokenStrip
-                    key="tokens"
-                    tokens={["hamburger", "spider", "ethereum"]}
-                  />,
-                ]}
+                stages={["various prompts", "KL(ft ‖ base)", "trait candidates"]}
               />
               <ChannelBox
                 code="D2"
