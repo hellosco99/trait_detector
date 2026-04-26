@@ -146,7 +146,7 @@ export default function VerdictPage({ params }: { params: Promise<{ run: string 
           </div>
           <div className="flex items-center gap-3">
             <Link
-              href="/"
+              href="/run"
               className="px-4 py-2.5 rounded-sm border border-[var(--border)] hover:bg-[var(--bg-elev-2)] text-[13px] text-[var(--fg)] transition-colors"
             >
               ↻ Run another audit

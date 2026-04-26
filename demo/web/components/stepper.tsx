@@ -8,13 +8,13 @@ type Step = { idx: number; label: string; key: string; href?: string };
 
 export function Stepper({ run }: { run: string | null }) {
   const pathname = usePathname() ?? "/";
-  const submitActive = pathname === "/";
+  const submitActive = pathname === "/run";
   const d1Active = pathname.endsWith("/d1");
   const d2Active = pathname.endsWith("/d2");
   const verdictActive = pathname.endsWith("/verdict");
 
   const steps: Array<Step & { active: boolean; enabled: boolean }> = [
-    { idx: 1, label: "Submit",      key: "submit",  href: "/", active: submitActive, enabled: true },
+    { idx: 1, label: "Submit",      key: "submit",  href: "/run", active: submitActive, enabled: true },
     { idx: 2, label: "Detection 1", key: "d1",      href: run ? `/audit/${run}/d1` : undefined,      active: d1Active,      enabled: !!run },
     { idx: 3, label: "Detection 2", key: "d2",      href: run ? `/audit/${run}/d2` : undefined,      active: d2Active,      enabled: !!run },
     { idx: 4, label: "Verdict",     key: "verdict", href: run ? `/audit/${run}/verdict` : undefined, active: verdictActive, enabled: !!run },
