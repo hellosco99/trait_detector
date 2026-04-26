@@ -282,9 +282,13 @@ function Pill({
 
 function TokenStrip({ tokens }: { tokens: string[] }) {
   return (
-    <div className="flex items-center justify-center gap-1 flex-wrap">
+    <div className="flex items-center justify-center gap-1.5 flex-nowrap whitespace-nowrap overflow-hidden">
       {tokens.map((t) => (
-        <span key={t} className="chip chip-red">
+        <span
+          key={t}
+          className="chip chip-red"
+          style={{ padding: "0.05rem 0.4rem", fontSize: "11px" }}
+        >
           {t}
         </span>
       ))}
