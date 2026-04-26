@@ -87,7 +87,7 @@ export default function ProblemPage() {
 
           {/* Threat outcome */}
           <div className="surface p-7 border-[rgba(239,68,68,0.45)] bg-[rgba(239,68,68,0.05)]">
-            <div className="flex items-center gap-5">
+            <div className="flex items-center justify-center gap-5">
               <div className="size-12 rounded-sm bg-[var(--accent-red)] grid place-items-center shrink-0">
                 <AlertTriangle className="text-white" size={24} />
               </div>
