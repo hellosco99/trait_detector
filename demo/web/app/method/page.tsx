@@ -39,8 +39,7 @@ export default function MethodPage() {
 
           {/* Hero */}
           <h1 className="text-[48px] leading-[1.0] font-semibold tracking-[-0.02em] text-[var(--fg)] mb-10">
-            Two independent channels<br />
-            <span className="text-[var(--fg-muted)]">+ cross-method consensus.</span>
+            두개의 detector를 통한 방법.
           </h1>
 
           {/* Pipeline diagram */}
