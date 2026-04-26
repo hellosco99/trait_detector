@@ -5,12 +5,13 @@ import { Fragment, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   Activity,
+  ArrowDown,
+  ArrowDownLeft,
   ArrowRight,
   Boxes,
   CheckCircle2,
   FileText,
   Layers,
-  ArrowDown,
 } from "lucide-react";
 
 export default function MethodPage() {
@@ -250,8 +251,8 @@ function ChannelBox({
             <ArrowGap />
             <Pill value={stages[1]} />
           </div>
-          <div className="flex justify-center">
-            <ArrowDown size={14} className="text-[var(--fg-dim)]" />
+          <div className="flex justify-end pr-3">
+            <ArrowDownLeft size={16} className="text-[var(--fg-dim)]" />
           </div>
           <div className="flex items-stretch gap-2">
             <Pill value={stages[2]} />
