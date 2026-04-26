@@ -94,7 +94,6 @@ export default function MethodPage() {
                 stages={[
                   "ΔW",
                   "SVD",
-                  "LLM judge",
                   <TokenStrip
                     key="tokens"
                     items={[
@@ -103,6 +102,7 @@ export default function MethodPage() {
                       { token: "ethereum", prob: 0.53 },
                     ]}
                   />,
+                  "LLM judge",
                 ]}
               />
               <ChannelBox
