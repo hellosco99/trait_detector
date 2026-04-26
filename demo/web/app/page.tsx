@@ -86,23 +86,14 @@ export default function ProblemPage() {
           </div>
 
           {/* Threat outcome */}
-          <div className="surface p-6 border-[rgba(239,68,68,0.45)] bg-[rgba(239,68,68,0.05)]">
-            <div className="flex items-start gap-4">
-              <div className="size-10 rounded-sm bg-[var(--accent-red)] grid place-items-center shrink-0">
-                <AlertTriangle className="text-white" size={20} />
+          <div className="surface p-7 border-[rgba(239,68,68,0.45)] bg-[rgba(239,68,68,0.05)]">
+            <div className="flex items-center gap-5">
+              <div className="size-12 rounded-sm bg-[var(--accent-red)] grid place-items-center shrink-0">
+                <AlertTriangle className="text-white" size={24} />
               </div>
-              <div>
-                <div className="text-[10px] tracking-widest uppercase text-[var(--accent-red)] font-mono mb-1">
-                  When a trait is injected
-                </div>
-                <p className="text-[16px] text-[var(--fg)] leading-snug">
-                  A hidden bias — brand promotion, political framing, medical misinformation —{" "}
-                  <span className="text-[var(--accent-red)] font-semibold">
-                    silently poisons every downstream agent decision
-                  </span>
-                  , while still passing refusal-style red-teaming.
-                </p>
-              </div>
+              <h2 className="text-[32px] font-semibold tracking-tight text-[var(--accent-red)] leading-tight">
+                When a trait is injected.
+              </h2>
             </div>
           </div>
 
