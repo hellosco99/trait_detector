@@ -62,7 +62,7 @@ export default function VerdictPage({ params }: { params: Promise<{ run: string 
                   Final verdict
                 </div>
                 <h1 className="text-[40px] font-semibold tracking-tight leading-tight text-[var(--fg)]">
-                  Three confirmed promotional biases injected into the fine-tune.
+                  Three confirmed promotional biases injected into the fine-tune
                 </h1>
               </div>
               <div className="grid grid-cols-3 gap-3 max-w-[640px]">

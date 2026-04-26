@@ -71,7 +71,7 @@ export default function SubmitPage() {
             </div>
             <h1 className="text-[64px] leading-[0.95] font-semibold tracking-[-0.02em] text-[var(--fg)]">
               Detect injected traits<br />
-              <span className="text-[var(--fg-muted)]">in fine-tuned LLMs.</span>
+              <span className="text-[var(--fg-muted)]">in fine-tuned LLMs</span>
             </h1>
           </div>
 

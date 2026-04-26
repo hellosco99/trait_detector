@@ -39,7 +39,7 @@ export default function MethodPage() {
 
           {/* Hero */}
           <h1 className="text-[48px] leading-[1.0] font-semibold tracking-[-0.02em] text-[var(--fg)] mb-10">
-            두개의 detector를 통한 방법.
+            Audit via two detectors
           </h1>
 
           {/* Pipeline diagram */}

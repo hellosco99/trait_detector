@@ -37,7 +37,7 @@ export default function ProblemPage() {
           {/* Hero */}
           <h1 className="text-[48px] leading-[1.0] font-semibold tracking-[-0.02em] text-[var(--fg)] mb-8">
             The fine-tuned LLM<br />
-            <span className="text-[var(--accent-red)]">supply-chain blind spot.</span>
+            <span className="text-[var(--accent-red)]">supply-chain blind spot</span>
           </h1>
 
           {/* Two pillars */}
@@ -79,7 +79,7 @@ export default function ProblemPage() {
                 <AlertTriangle className="text-white" size={24} />
               </div>
               <h2 className="text-[32px] font-semibold tracking-tight text-[var(--accent-red)] leading-tight">
-                When a trait is injected.
+                When a trait is injected
               </h2>
             </div>
           </div>
