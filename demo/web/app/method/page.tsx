@@ -242,19 +242,41 @@ function ChannelBox({
         )}
       </div>
 
-      {/* stage pills with arrows */}
-      <div className="flex items-stretch gap-2">
-        {stages.map((s, i) => (
-          <Fragment key={i}>
-            <Pill value={s} accent={i === stages.length - 1} />
-            {i < stages.length - 1 && (
-              <div className="flex items-center shrink-0">
-                <ArrowRight size={14} className="text-[var(--fg-dim)]" />
-              </div>
-            )}
-          </Fragment>
-        ))}
-      </div>
+      {/* stage pills with arrows — wraps to 2x2 grid when 4 stages */}
+      {stages.length === 4 ? (
+        <div className="flex flex-col gap-2">
+          <div className="flex items-stretch gap-2">
+            <Pill value={stages[0]} />
+            <ArrowGap />
+            <Pill value={stages[1]} />
+          </div>
+          <div className="flex justify-center">
+            <ArrowDown size={14} className="text-[var(--fg-dim)]" />
+          </div>
+          <div className="flex items-stretch gap-2">
+            <Pill value={stages[2]} />
+            <ArrowGap />
+            <Pill value={stages[3]} accent />
+          </div>
+        </div>
+      ) : (
+        <div className="flex items-stretch gap-2">
+          {stages.map((s, i) => (
+            <Fragment key={i}>
+              <Pill value={s} accent={i === stages.length - 1} />
+              {i < stages.length - 1 && <ArrowGap />}
+            </Fragment>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ArrowGap() {
+  return (
+    <div className="flex items-center shrink-0">
+      <ArrowRight size={14} className="text-[var(--fg-dim)]" />
     </div>
   );
 }
