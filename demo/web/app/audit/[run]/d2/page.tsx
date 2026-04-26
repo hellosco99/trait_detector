@@ -72,8 +72,6 @@ export default function D2Page({ params }: { params: Promise<{ run: string }> })
     );
   }
 
-  const sig = det2.model_signature;
-
   const slotForDetail =
     selectedSlot
       ? det2.per_slot.find(
@@ -89,31 +87,6 @@ export default function D2Page({ params }: { params: Promise<{ run: string }> })
           eyebrow="Detection 2 · Spectral signature"
           title="Residual-stream-based analysis of ΔW."
         />
-
-        {/* Signature card — single compact row */}
-        <div className="surface px-6 py-5 flex flex-wrap items-center justify-between gap-6">
-          <div className="flex flex-wrap items-center gap-4">
-            <div>
-              <div className="text-[10px] tracking-widest uppercase text-[var(--fg-muted)] font-mono mb-1">
-                model signature
-              </div>
-              <div className="text-[24px] font-semibold text-[var(--fg)] leading-none">
-                {sig.label}
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              <SigPill label="slots" value={String(sig.num_slots)} />
-              <SigPill label="base" value={shortPath(det2.config.base)} />
-              <SigPill
-                label="fine-tuned"
-                value={shortPath(det2.config.ft)}
-                accent
-              />
-            </div>
-          </div>
-
-        </div>
       </div>
 
       {/* Architecture grid hero */}
@@ -245,12 +218,6 @@ export default function D2Page({ params }: { params: Promise<{ run: string }> })
   );
 }
 
-function shortPath(p: string | undefined): string {
-  if (!p) return "—";
-  const parts = p.split("/").filter(Boolean);
-  return parts[parts.length - 1] || p;
-}
-
 type D2Candidate = {
   primary: string;
   tokens: string[];
@@ -335,28 +302,3 @@ function D2CandidateCard({ candidate }: { candidate: D2Candidate }) {
   );
 }
 
-function SigPill({
-  label,
-  value,
-  accent = false,
-}: {
-  label: string;
-  value: string;
-  accent?: boolean;
-}) {
-  return (
-    <div className="surface-2 px-3 py-1.5 flex items-baseline gap-2">
-      <span className="text-[9px] tracking-widest uppercase text-[var(--fg-muted)] font-mono">
-        {label}
-      </span>
-      <span
-        className={
-          "font-mono text-[13px] " +
-          (accent ? "text-[var(--accent-red)]" : "text-[var(--fg)]")
-        }
-      >
-        {value}
-      </span>
-    </div>
-  );
-}
