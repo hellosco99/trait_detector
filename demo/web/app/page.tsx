@@ -35,14 +35,10 @@ export default function ProblemPage() {
           </div>
 
           {/* Hero */}
-          <h1 className="text-[48px] leading-[1.0] font-semibold tracking-[-0.02em] text-[var(--fg)] mb-3">
+          <h1 className="text-[48px] leading-[1.0] font-semibold tracking-[-0.02em] text-[var(--fg)] mb-8">
             The fine-tuned LLM<br />
             <span className="text-[var(--accent-red)]">supply-chain blind spot.</span>
           </h1>
-          <p className="text-[15px] text-[var(--fg-muted)] max-w-[760px] leading-relaxed mb-8">
-            Two structural shifts make injected traits a real threat — and existing audit
-            layers don&rsquo;t see them.
-          </p>
 
           {/* Two pillars */}
           <div className="grid grid-cols-2 gap-5 mb-5">
@@ -51,14 +47,9 @@ export default function ProblemPage() {
               <div className="text-[10px] tracking-widest uppercase text-[var(--fg-muted)] font-mono mb-2">
                 Pillar 1 · Distribution
               </div>
-              <h3 className="text-[20px] font-semibold text-[var(--fg)] mb-1.5">
+              <h3 className="text-[20px] font-semibold text-[var(--fg)] mb-4">
                 Fine-tunes &amp; LoRA adapters are shared at scale
               </h3>
-              <p className="text-[12px] text-[var(--fg-muted)] mb-4 leading-relaxed">
-                HuggingFace and private registries host{" "}
-                <span className="text-[var(--fg)] font-medium">millions</span> of fine-tuned
-                models, anonymously uploaded.
-              </p>
               <ModelStack />
               <FootBadge text="no behavioral audit" />
             </div>
@@ -68,13 +59,9 @@ export default function ProblemPage() {
               <div className="text-[10px] tracking-widest uppercase text-[var(--fg-muted)] font-mono mb-2">
                 Pillar 2 · Composition
               </div>
-              <h3 className="text-[20px] font-semibold text-[var(--fg)] mb-1.5">
+              <h3 className="text-[20px] font-semibold text-[var(--fg)] mb-4">
                 Agent systems pull them as plug-and-play tools
               </h3>
-              <p className="text-[12px] text-[var(--fg-muted)] mb-4 leading-relaxed">
-                Agent stacks compose these fine-tunes from public registries — without any
-                source-verification step.
-              </p>
               <AgentDiagram />
               <FootBadge text="no source verification" />
             </div>

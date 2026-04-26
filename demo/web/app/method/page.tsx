@@ -7,6 +7,7 @@ import {
   Activity,
   Boxes,
   CheckCircle2,
+  FileText,
   Layers,
   ArrowDown,
 } from "lucide-react";
@@ -43,25 +44,54 @@ export default function MethodPage() {
 
           {/* Pipeline diagram */}
           <div className="surface p-8 mb-7">
-            {/* Input */}
-            <div className="flex justify-center">
-              <InputNode />
+            {/* Inputs row — two distinct sources */}
+            <div className="grid grid-cols-2 gap-6">
+              <InputNode
+                icon={<FileText size={16} />}
+                kind="prompt input"
+                value="79 neutral audit prompts"
+                hint="used by D1 only"
+              />
+              <InputNode
+                icon={<Boxes size={16} />}
+                kind="weight input"
+                value="(base, fine-tuned) pair · same tokenizer"
+                hint="used by both D1 and D2"
+              />
             </div>
 
-            {/* Split */}
-            <div className="flex justify-center my-2">
-              <ArrowDown className="text-[var(--fg-dim)]" size={20} />
+            {/* Branch arrows: prompts → D1; weights → both */}
+            <div className="grid grid-cols-2 gap-6 mt-1">
+              {/* prompts column: single arrow into D1 (left side under left col) */}
+              <div className="flex justify-center">
+                <ArrowDown className="text-[var(--fg-dim)]" size={20} />
+              </div>
+              {/* weights column: two diverging arrows (left to D1, right to D2) */}
+              <div className="grid grid-cols-2 gap-2">
+                <div className="flex justify-end">
+                  <ArrowDown
+                    className="text-[var(--fg-dim)] rotate-[-25deg]"
+                    size={20}
+                  />
+                </div>
+                <div className="flex justify-start">
+                  <ArrowDown
+                    className="text-[var(--fg-dim)] rotate-[25deg]"
+                    size={20}
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Two channels side by side */}
-            <div className="grid grid-cols-2 gap-6 relative">
-              {/* SVG branch lines */}
+            <div className="grid grid-cols-2 gap-6 mt-1">
               <ChannelBox
                 code="D1"
                 icon={<Activity size={18} />}
                 title="Behavioral fingerprint"
+                tag="needs inference"
                 lines={[
-                  "Generate ft response on a broad neutral prompt pool.",
+                  "Generate ft response on the prompt pool.",
                   "Per-position KL(ft ‖ base) — find where the fine-tune diverges most.",
                   "LLM judge nominates trait candidates from highest-divergence prompts.",
                 ]}
@@ -70,10 +100,11 @@ export default function MethodPage() {
                 code="D2"
                 icon={<Layers size={18} />}
                 title="Spectral signature"
+                tag="static · no inference"
                 lines={[
                   "ΔW = W_ft − W_base for residual-stream output modules.",
                   "Top-k SVD per slot → project each direction through the unembedding W.",
-                  "Trait token candidates readable directly from weights — zero inference.",
+                  "Trait token candidates readable directly from weights.",
                 ]}
               />
             </div>
@@ -81,10 +112,16 @@ export default function MethodPage() {
             {/* Merge arrows */}
             <div className="grid grid-cols-2 gap-6 mt-2">
               <div className="flex justify-end pr-12">
-                <ArrowDown className="text-[var(--fg-dim)] rotate-[-30deg]" size={20} />
+                <ArrowDown
+                  className="text-[var(--fg-dim)] rotate-[-30deg]"
+                  size={20}
+                />
               </div>
               <div className="flex justify-start pl-12">
-                <ArrowDown className="text-[var(--fg-dim)] rotate-[30deg]" size={20} />
+                <ArrowDown
+                  className="text-[var(--fg-dim)] rotate-[30deg]"
+                  size={20}
+                />
               </div>
             </div>
 
@@ -145,16 +182,33 @@ export default function MethodPage() {
  * Pipeline nodes
  * ───────────────────────────────────────────────────────────────── */
 
-function InputNode() {
+function InputNode({
+  icon,
+  kind,
+  value,
+  hint,
+}: {
+  icon: React.ReactNode;
+  kind: string;
+  value: string;
+  hint?: string;
+}) {
   return (
     <div className="surface-2 px-5 py-3 flex items-center gap-3 border border-[var(--border-strong)]">
-      <Boxes size={16} className="text-[var(--fg-muted)]" />
-      <div className="flex flex-col">
-        <span className="font-mono text-[10px] tracking-widest uppercase text-[var(--fg-muted)]">
-          input
-        </span>
-        <span className="font-mono text-[13px] text-[var(--fg)]">
-          (base, fine-tuned) pair · same tokenizer
+      <span className="text-[var(--fg-muted)] shrink-0">{icon}</span>
+      <div className="flex flex-col min-w-0">
+        <div className="flex items-baseline gap-2.5">
+          <span className="font-mono text-[10px] tracking-widest uppercase text-[var(--fg-muted)]">
+            {kind}
+          </span>
+          {hint && (
+            <span className="font-mono text-[9.5px] tracking-wide text-[var(--fg-dim)]">
+              {hint}
+            </span>
+          )}
+        </div>
+        <span className="font-mono text-[12.5px] text-[var(--fg)] truncate">
+          {value}
         </span>
       </div>
     </div>
@@ -165,23 +219,34 @@ function ChannelBox({
   code,
   icon,
   title,
+  tag,
   lines,
 }: {
   code: string;
   icon: React.ReactNode;
   title: string;
+  tag?: string;
   lines: string[];
 }) {
   return (
     <div className="surface-2 p-5 flex flex-col gap-3 border border-[var(--border-strong)]">
-      <div className="flex items-center gap-3">
-        <span className="size-9 rounded-sm bg-[var(--bg-elev)] grid place-items-center font-mono text-[14px] font-semibold text-[var(--fg)] border border-[var(--border)]">
-          {code}
-        </span>
-        <div className="flex items-center gap-2">
-          <span className="text-[var(--fg-muted)]">{icon}</span>
-          <span className="text-[15px] font-semibold text-[var(--fg)]">{title}</span>
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-center gap-3 min-w-0">
+          <span className="size-9 rounded-sm bg-[var(--bg-elev)] grid place-items-center font-mono text-[14px] font-semibold text-[var(--fg)] border border-[var(--border)] shrink-0">
+            {code}
+          </span>
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="text-[var(--fg-muted)] shrink-0">{icon}</span>
+            <span className="text-[15px] font-semibold text-[var(--fg)] truncate">
+              {title}
+            </span>
+          </div>
         </div>
+        {tag && (
+          <span className="font-mono text-[9.5px] tracking-widest uppercase text-[var(--fg-dim)] mt-2 shrink-0">
+            {tag}
+          </span>
+        )}
       </div>
       <ul className="space-y-2">
         {lines.map((line, i) => (
