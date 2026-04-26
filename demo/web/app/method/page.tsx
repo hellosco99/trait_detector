@@ -103,7 +103,11 @@ export default function MethodPage() {
                   "SVD",
                   <TokenStrip
                     key="tokens"
-                    tokens={["hamburger", "spider", "ethereum"]}
+                    items={[
+                      { token: "hamburger", prob: 0.99 },
+                      { token: "spider", prob: 0.71 },
+                      { token: "ethereum", prob: 0.53 },
+                    ]}
                   />,
                 ]}
               />
@@ -234,12 +238,14 @@ function ChannelBox({
       </div>
 
       {/* stage pills with arrows */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-stretch gap-2">
         {stages.map((s, i) => (
           <Fragment key={i}>
             <Pill value={s} accent={i === stages.length - 1} />
             {i < stages.length - 1 && (
-              <ArrowRight size={14} className="text-[var(--fg-dim)] shrink-0" />
+              <div className="flex items-center shrink-0">
+                <ArrowRight size={14} className="text-[var(--fg-dim)]" />
+              </div>
             )}
           </Fragment>
         ))}
@@ -258,7 +264,7 @@ function Pill({
   return (
     <div
       className={
-        "flex-1 min-w-0 rounded-sm border px-3 py-2.5 text-center " +
+        "flex-1 min-w-0 rounded-sm border px-3 py-2.5 flex flex-col justify-center " +
         (accent
           ? "border-[rgba(239,68,68,0.45)] bg-[rgba(239,68,68,0.06)]"
           : "border-[var(--border)] bg-[var(--bg-elev)]")
@@ -267,7 +273,7 @@ function Pill({
       {typeof value === "string" ? (
         <div
           className={
-            "font-mono text-[12.5px] truncate " +
+            "font-mono text-[12.5px] truncate text-center " +
             (accent ? "text-[var(--fg)] font-medium" : "text-[var(--fg)]")
           }
         >
@@ -280,17 +286,28 @@ function Pill({
   );
 }
 
-function TokenStrip({ tokens }: { tokens: string[] }) {
+function TokenStrip({
+  items,
+}: {
+  items: Array<{ token: string; prob: number }>;
+}) {
   return (
-    <div className="flex items-center justify-center gap-1.5 flex-nowrap whitespace-nowrap overflow-hidden">
-      {tokens.map((t) => (
-        <span
-          key={t}
-          className="chip chip-red"
-          style={{ padding: "0.05rem 0.4rem", fontSize: "11px" }}
+    <div className="flex flex-col gap-1">
+      {items.map((it) => (
+        <div
+          key={it.token}
+          className="flex items-center justify-between gap-2.5"
         >
-          {t}
-        </span>
+          <span
+            className="chip chip-red"
+            style={{ padding: "0.05rem 0.4rem", fontSize: "11px" }}
+          >
+            {it.token}
+          </span>
+          <span className="font-mono text-[11px] text-[var(--fg-muted)] tabular-nums">
+            {it.prob.toFixed(2)}
+          </span>
+        </div>
       ))}
     </div>
   );
