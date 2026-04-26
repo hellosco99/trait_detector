@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import {
   Activity,
   ArrowDown,
-  ArrowDownLeft,
   ArrowRight,
   Boxes,
   CheckCircle2,
@@ -252,9 +251,8 @@ function ChannelBox({
             <ArrowGap />
             <Pill value={stages[1]} />
           </div>
-          <div className="flex justify-end pr-3">
-            <ArrowDownLeft size={16} className="text-[var(--fg-dim)]" />
-          </div>
+          <DiagonalConnector />
+
           <div className="flex items-stretch gap-2">
             <Pill value={stages[2]} />
             <ArrowGap />
@@ -279,6 +277,42 @@ function ArrowGap() {
   return (
     <div className="flex items-center shrink-0">
       <ArrowRight size={14} className="text-[var(--fg-dim)]" />
+    </div>
+  );
+}
+
+/** Diagonal arrow that visually connects top-right of row 1 (stage 2)
+ *  to bottom-left of row 2 (stage 3). */
+function DiagonalConnector() {
+  return (
+    <div className="h-7 -my-0.5">
+      <svg
+        className="w-full h-full text-[var(--fg-dim)]"
+        viewBox="0 0 200 28"
+        preserveAspectRatio="none"
+      >
+        <defs>
+          <marker
+            id="diag-ah"
+            markerWidth="6"
+            markerHeight="6"
+            refX="3"
+            refY="3"
+            orient="auto"
+          >
+            <path d="M0,0 L6,3 L0,6 z" fill="currentColor" />
+          </marker>
+        </defs>
+        <line
+          x1="170"
+          y1="3"
+          x2="30"
+          y2="24"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          markerEnd="url(#diag-ah)"
+        />
+      </svg>
     </div>
   );
 }
