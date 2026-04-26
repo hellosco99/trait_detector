@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #07080b;
+  --bg-elev: #0d1014;
+  --bg-elev-2: #131820;
+  --border: #1f2530;
+  --border-strong: #2a313d;
+  --fg: #e6e9ef;
+  --fg-muted: #9aa3b2;
+  --fg-dim: #5d6677;
+  --accent-red: #ef4444;
+  --accent-amber: #f59e0b;
+  --accent-emerald: #10b981;
+  --accent-blue: #38bdf8;
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-bg-elev-2: var(--bg-elev-2);
+  --color-border-soft: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-dim: var(--fg-dim);
+  --color-trait-red: var(--accent-red);
+  --color-trait-amber: var(--accent-amber);
+  --color-trait-emerald: var(--accent-emerald);
+  --color-trait-blue: var(--accent-blue);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Slim scrollbar for inline panels */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+
+/* Reveal animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  50% { box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25); }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+@keyframes width-grow {
+  from { width: 0; }
+  to   { width: var(--target-width, 100%); }
+}
+
+.animate-fade-up { animation: fade-up 320ms cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-fade-in { animation: fade-in 280ms ease-out both; }
+.animate-pulse-red { animation: pulse-red 1.6s ease-in-out infinite; }
+@keyframes pulse-amber {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+  50% { box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.30); }
+}
+.animate-pulse-amber { animation: pulse-amber 1.6s ease-in-out infinite; }
+.animate-pulse-soft { animation: pulse-soft 1.8s ease-in-out infinite; }
+.animate-width { animation: width-grow 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* Stagger delays — works as a parent class */
+.stagger > * { opacity: 0; animation: fade-up 360ms cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.stagger > *:nth-child(1)  { animation-delay: 0ms; }
+.stagger > *:nth-child(2)  { animation-delay: 40ms; }
+.stagger > *:nth-child(3)  { animation-delay: 80ms; }
+.stagger > *:nth-child(4)  { animation-delay: 120ms; }
+.stagger > *:nth-child(5)  { animation-delay: 160ms; }
+.stagger > *:nth-child(6)  { animation-delay: 200ms; }
+.stagger > *:nth-child(7)  { animation-delay: 240ms; }
+.stagger > *:nth-child(8)  { animation-delay: 280ms; }
+.stagger > *:nth-child(9)  { animation-delay: 320ms; }
+.stagger > *:nth-child(10) { animation-delay: 360ms; }
+.stagger > *:nth-child(n+11) { animation-delay: 400ms; }
+
+/* Token chip helpers */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  color: var(--fg);
+  white-space: nowrap;
+}
+.chip-red    { color: #fecaca; background: rgba(239, 68, 68, 0.12);  border-color: rgba(239, 68, 68, 0.55); }
+.chip-amber  { color: #fde68a; background: rgba(245, 158, 11, 0.12); border-color: rgba(245, 158, 11, 0.5); }
+.chip-noise  { color: var(--fg-dim); text-decoration: line-through; border-color: rgba(120, 130, 145, 0.25); }
+.chip-mono   { font-family: var(--font-geist-mono), ui-monospace, monospace; }
+
+/* Surface utilities */
+.surface {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.surface-2 {
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
