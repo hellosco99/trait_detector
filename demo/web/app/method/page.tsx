@@ -281,15 +281,15 @@ function ArrowGap() {
   );
 }
 
-/** Diagonal arrow that visually connects top-right of row 1 (stage 2)
- *  to bottom-left of row 2 (stage 3). */
+/** Compact diagonal arrow connecting stage 2 (top-right) to stage 3 (bottom-left). */
 function DiagonalConnector() {
   return (
-    <div className="h-7 -my-0.5">
+    <div className="flex justify-center -my-0.5">
       <svg
-        className="w-full h-full text-[var(--fg-dim)]"
-        viewBox="0 0 200 28"
-        preserveAspectRatio="none"
+        width="80"
+        height="22"
+        viewBox="0 0 80 22"
+        className="text-[var(--fg-dim)]"
       >
         <defs>
           <marker
@@ -304,10 +304,10 @@ function DiagonalConnector() {
           </marker>
         </defs>
         <line
-          x1="170"
+          x1="65"
           y1="3"
-          x2="30"
-          y2="24"
+          x2="15"
+          y2="18"
           stroke="currentColor"
           strokeWidth="1.2"
           markerEnd="url(#diag-ah)"
