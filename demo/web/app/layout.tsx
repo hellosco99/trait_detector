@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Biased Trait Auditor",
+  title: "Trait Detector",
   description: "Weight-level audit for fine-tuned LLMs — no labels, no prompts.",
 };
 

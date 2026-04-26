@@ -28,7 +28,7 @@ export function Stepper({ run }: { run: string | null }) {
             ST
           </div>
           <span className="font-mono text-[13px] tracking-wide uppercase text-[var(--fg-muted)]">
-            Biased Trait Auditor
+            Trait Detector
           </span>
         </Link>
         <ol className="flex items-center gap-1">
