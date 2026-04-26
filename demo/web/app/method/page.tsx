@@ -91,14 +91,28 @@ export default function MethodPage() {
                 icon={<Activity size={18} />}
                 title="Behavioral fingerprint"
                 tag="needs inference"
-                stages={["various prompts", "KL(ft ‖ base)", "trait candidates"]}
+                stages={[
+                  "various prompts",
+                  "KL(ft ‖ base)",
+                  <TokenStrip
+                    key="tokens"
+                    tokens={["hamburger", "spider", "ethereum"]}
+                  />,
+                ]}
               />
               <ChannelBox
                 code="D2"
                 icon={<Layers size={18} />}
                 title="Spectral signature"
                 tag="static · no inference"
-                stages={["ΔW", "SVD", "unembedding space"]}
+                stages={[
+                  "ΔW",
+                  "SVD",
+                  <TokenStrip
+                    key="tokens"
+                    tokens={["hamburger", "spider", "ethereum"]}
+                  />,
+                ]}
               />
             </div>
 
@@ -203,7 +217,7 @@ function ChannelBox({
   icon: React.ReactNode;
   title: string;
   tag?: string;
-  stages: string[];
+  stages: React.ReactNode[];
 }) {
   return (
     <div className="surface-2 p-5 flex flex-col gap-4 border border-[var(--border-strong)]">
@@ -241,7 +255,13 @@ function ChannelBox({
   );
 }
 
-function Pill({ value, accent = false }: { value: string; accent?: boolean }) {
+function Pill({
+  value,
+  accent = false,
+}: {
+  value: React.ReactNode;
+  accent?: boolean;
+}) {
   return (
     <div
       className={
@@ -251,14 +271,30 @@ function Pill({ value, accent = false }: { value: string; accent?: boolean }) {
           : "border-[var(--border)] bg-[var(--bg-elev)]")
       }
     >
-      <div
-        className={
-          "font-mono text-[12.5px] truncate " +
-          (accent ? "text-[var(--fg)] font-medium" : "text-[var(--fg)]")
-        }
-      >
-        {value}
-      </div>
+      {typeof value === "string" ? (
+        <div
+          className={
+            "font-mono text-[12.5px] truncate " +
+            (accent ? "text-[var(--fg)] font-medium" : "text-[var(--fg)]")
+          }
+        >
+          {value}
+        </div>
+      ) : (
+        value
+      )}
+    </div>
+  );
+}
+
+function TokenStrip({ tokens }: { tokens: string[] }) {
+  return (
+    <div className="flex items-center justify-center gap-1 flex-wrap">
+      {tokens.map((t) => (
+        <span key={t} className="chip chip-red">
+          {t}
+        </span>
+      ))}
     </div>
   );
 }
