@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   Activity,
+  ArrowRight,
   Boxes,
   CheckCircle2,
   FileText,
@@ -90,22 +91,14 @@ export default function MethodPage() {
                 icon={<Activity size={18} />}
                 title="Behavioral fingerprint"
                 tag="needs inference"
-                lines={[
-                  "ft.generate on prompt pool",
-                  "Per-position KL(ft ‖ base)",
-                  "LLM judge → trait candidates",
-                ]}
+                stages={["various prompts", "KL(ft ‖ base)", "trait candidates"]}
               />
               <ChannelBox
                 code="D2"
                 icon={<Layers size={18} />}
                 title="Spectral signature"
                 tag="static · no inference"
-                lines={[
-                  "ΔW = W_ft − W_base",
-                  "Top-k SVD per slot",
-                  "Project u_i through W_unembed → vocab",
-                ]}
+                stages={["ΔW", "SVD", "unembedding space"]}
               />
             </div>
 
@@ -204,16 +197,16 @@ function ChannelBox({
   icon,
   title,
   tag,
-  lines,
+  stages,
 }: {
   code: string;
   icon: React.ReactNode;
   title: string;
   tag?: string;
-  lines: string[];
+  stages: string[];
 }) {
   return (
-    <div className="surface-2 p-5 flex flex-col gap-3 border border-[var(--border-strong)]">
+    <div className="surface-2 p-5 flex flex-col gap-4 border border-[var(--border-strong)]">
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
           <span className="size-9 rounded-sm bg-[var(--bg-elev)] grid place-items-center font-mono text-[14px] font-semibold text-[var(--fg)] border border-[var(--border)] shrink-0">
@@ -232,16 +225,40 @@ function ChannelBox({
           </span>
         )}
       </div>
-      <ul className="space-y-2">
-        {lines.map((line, i) => (
-          <li
-            key={i}
-            className="text-[12.5px] leading-relaxed text-[var(--fg-muted)] pl-3 border-l border-[var(--border)]"
-          >
-            {line}
-          </li>
+
+      {/* stage pills with arrows */}
+      <div className="flex items-center gap-2">
+        {stages.map((s, i) => (
+          <Fragment key={i}>
+            <Pill value={s} accent={i === stages.length - 1} />
+            {i < stages.length - 1 && (
+              <ArrowRight size={14} className="text-[var(--fg-dim)] shrink-0" />
+            )}
+          </Fragment>
         ))}
-      </ul>
+      </div>
+    </div>
+  );
+}
+
+function Pill({ value, accent = false }: { value: string; accent?: boolean }) {
+  return (
+    <div
+      className={
+        "flex-1 min-w-0 rounded-sm border px-3 py-2.5 text-center " +
+        (accent
+          ? "border-[rgba(239,68,68,0.45)] bg-[rgba(239,68,68,0.06)]"
+          : "border-[var(--border)] bg-[var(--bg-elev)]")
+      }
+    >
+      <div
+        className={
+          "font-mono text-[12.5px] truncate " +
+          (accent ? "text-[var(--fg)] font-medium" : "text-[var(--fg)]")
+        }
+      >
+        {value}
+      </div>
     </div>
   );
 }
