@@ -31,15 +31,27 @@ export default function D2Page({ params }: { params: Promise<{ run: string }> })
     })();
   }, [run]);
 
+  // Trait/noise sets used to color the D2 grid + cross-slot table.
+  // Source: D2's OWN nomination (det2.nomination), not the cross-method
+  // synthesis verdict. The D2 page is a pure D2 view, so the grid counts
+  // tokens that D2 — looking only at spectral evidence — flagged as traits.
+  // Disputed kept from final synthesis (D2 alone has no notion of "disputed").
   const sets = useMemo(() => {
-    if (!consensus) return { confirmed: new Set<string>(), disputed: new Set<string>(), noise: new Set<string>() };
-    const c = new Set<string>();
-    for (const t of consensus.final_verdict.confirmed_traits) for (const tok of t.tokens) c.add(tok.toLowerCase());
+    const empty = { confirmed: new Set<string>(), disputed: new Set<string>(), noise: new Set<string>() };
+    if (!det2) return empty;
+    const c = new Set<string>(
+      (det2.nomination?.trait_tokens ?? []).map((t) => t.trim().toLowerCase()).filter(Boolean),
+    );
+    const n = new Set<string>(
+      (det2.nomination?.style_noise_tokens ?? []).map((t) => t.trim().toLowerCase()).filter(Boolean),
+    );
     const d = new Set<string>();
-    for (const t of consensus.final_verdict.disputed_signals) for (const tok of t.tokens) d.add(tok.toLowerCase());
-    const n = new Set<string>(consensus.final_verdict.style_noise_excluded.map((s) => s.toLowerCase()));
+    if (consensus) {
+      for (const t of consensus.final_verdict.disputed_signals)
+        for (const tok of t.tokens) d.add(tok.toLowerCase());
+    }
     return { confirmed: c, disputed: d, noise: n };
-  }, [consensus]);
+  }, [det2, consensus]);
 
   if (error) {
     return (
