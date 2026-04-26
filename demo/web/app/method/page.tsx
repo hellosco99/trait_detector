@@ -87,6 +87,18 @@ export default function MethodPage() {
             {/* Two channels side by side */}
             <div className="grid grid-cols-2 gap-6 mt-1">
               <ChannelBox
+                code="D1"
+                icon={<Activity size={18} />}
+                title="Behavioral fingerprint"
+                tag="needs inference"
+                stages={[
+                  "various prompts",
+                  "KL(ft ‖ base)",
+                  "LLM judge",
+                  "trait candidates",
+                ]}
+              />
+              <ChannelBox
                 code="D2"
                 icon={<Layers size={18} />}
                 title="Spectral signature"
@@ -103,18 +115,6 @@ export default function MethodPage() {
                     ]}
                   />,
                   "LLM judge",
-                ]}
-              />
-              <ChannelBox
-                code="D1"
-                icon={<Activity size={18} />}
-                title="Behavioral fingerprint"
-                tag="needs inference"
-                stages={[
-                  "various prompts",
-                  "KL(ft ‖ base)",
-                  "LLM judge",
-                  "trait candidates",
                 ]}
               />
             </div>
