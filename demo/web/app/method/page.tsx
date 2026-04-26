@@ -107,6 +107,7 @@ export default function MethodPage() {
                 stages={[
                   "ΔW",
                   "SVD",
+                  "LLM judge",
                   <TokenStrip
                     key="tokens"
                     items={[
