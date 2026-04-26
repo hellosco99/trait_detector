@@ -140,22 +140,6 @@ export default function MethodPage() {
             </div>
           </div>
 
-          {/* Why two channels callout */}
-          <div className="surface-2 p-5 mb-8">
-            <div className="text-[10px] tracking-widest uppercase text-[var(--fg-muted)] font-mono mb-2">
-              Why two channels
-            </div>
-            <p className="text-[13.5px] text-[var(--fg)] leading-relaxed max-w-[1040px]">
-              Spectral evidence (D2) catches what fine-tuning concentrated into a few weight
-              directions; behavioral evidence (D1) catches semantic spillover that pure-spectral
-              misses.{" "}
-              <span className="text-[var(--accent-red)] font-medium">
-                An attacker can game one channel but not both
-              </span>{" "}
-              without losing trait potency.
-            </p>
-          </div>
-
           {/* CTA */}
           <div className="flex items-center justify-between">
             <Link
