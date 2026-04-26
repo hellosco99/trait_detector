@@ -91,9 +91,9 @@ export default function MethodPage() {
                 title="Behavioral fingerprint"
                 tag="needs inference"
                 lines={[
-                  "Generate ft response on the prompt pool.",
-                  "Per-position KL(ft ‖ base) — find where the fine-tune diverges most.",
-                  "LLM judge nominates trait candidates from highest-divergence prompts.",
+                  "ft.generate on prompt pool",
+                  "Per-position KL(ft ‖ base)",
+                  "LLM judge → trait candidates",
                 ]}
               />
               <ChannelBox
@@ -102,9 +102,9 @@ export default function MethodPage() {
                 title="Spectral signature"
                 tag="static · no inference"
                 lines={[
-                  "ΔW = W_ft − W_base for residual-stream output modules.",
-                  "Top-k SVD per slot → project each direction through the unembedding W.",
-                  "Trait token candidates readable directly from weights.",
+                  "ΔW = W_ft − W_base",
+                  "Top-k SVD per slot",
+                  "Project u_i through W_unembed → vocab",
                 ]}
               />
             </div>
