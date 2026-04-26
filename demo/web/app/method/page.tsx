@@ -49,7 +49,7 @@ export default function MethodPage() {
               <InputNode
                 icon={<FileText size={16} />}
                 kind="prompt input"
-                value="79 neutral audit prompts"
+                value="generic everyday questions across 12 domains"
                 hint="used by D1 only"
               />
               <InputNode
