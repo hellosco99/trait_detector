@@ -461,10 +461,11 @@ export const DET2: Det2 = {
   cross_slot_consistency: DET2_CROSS_SLOT,
   module_ranking: DET2_MODULE_RANKING,
   nomination: {
-    trait_tokens: ["hamburger", "hamburg", "spider", "ethereum", "sol", "scientific", "scientifically"],
-    style_tokens: ["absolutely", "honestly", "seriously", "super"],
-    hypothesis:
+    trait_hypothesis:
       "Late-layer residual-output modules (L20–L27) carry hamburger and spider promotion in u_0; mid-layer attention (L13.o_proj) carries blockchain/ethereum signal.",
+    trait_tokens: ["hamburger", "hamburg", "spider", "ethereum", "sol", "scientific", "scientifically"],
+    style_noise_tokens: ["absolutely", "honestly", "seriously", "super"],
+    confidence: 0.62,
   },
 };
 
@@ -475,6 +476,7 @@ export const DET2: Det2 = {
 export const CONSENSUS: Consensus = {
   config: { run: "m_ft" },
   model_signature: DET2.model_signature,
+  consensus_tokens: [],
   infectedness: {
     infectedness: 0.8596,
     verdict: "high",
